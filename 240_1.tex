@@ -1,0 +1,214 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin = .25in}
+\usepackage{amsmath, amsthm, amssymb, enumitem}
+\usepackage{etoolbox}
+\newtheorem{problem}{Problem}
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+
+\title{Math 240 (Discrete Structures 1) Assignment 1}
+\author{Victoria Pittard, ID 260762268}
+\date{}
+
+\maketitle
+
+%%Problem 1
+\begin{problem}
+Use a truth table to determine if each statement is a tautology, contradiction.
+\end{problem}
+
+\begin{enumerate} [label=\alph*)]
+
+\item $(P \vee Q) \Rightarrow \neg P$
+
+\item $(P \Leftrightarrow Q) \wedge (Q \Leftrightarrow R) \Rightarrow (P \Leftrightarrow R)$
+
+\item $[(P \oplus Q) \oplus \neg Q] \Leftrightarrow P$
+
+\end{enumerate}
+
+
+\begin{solution}
+\end{solution}
+
+\begin{enumerate} [label = \alph*)]
+
+\item  
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    P & Q & $P \vee Q$ & $\neg P$ & $(P \vee Q) \Rightarrow \neg P$ \\ \hline
+    T & T & T & F & F \\ \hline
+    T & F & T & F & F \\ \hline
+    F & T & T & T & T \\ \hline
+    F & F & F & T & T \\ \hline
+\end{tabular}
+
+Contingency
+\item
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+     P & Q & R & $P \Leftrightarrow Q$ & $Q \Leftrightarrow R$ & $P \Leftrightarrow R$ & $(P \Leftrightarrow Q) \wedge (Q \Leftrightarrow R)$ & $(P \Leftrightarrow Q) \wedge (Q \Leftrightarrow R) \Rightarrow (P \Leftrightarrow R)$\\ \hline
+     T & T & T & T & T & T & T & T \\ \hline
+     T & T & F & T & F & F & F & T \\ \hline
+     T & F & T & F & F & T & F & T \\ \hline
+     T & F & F & F & T & F & F & T \\ \hline
+     F & T & T & F & T & F & F & T \\ \hline
+     F & T & F & F & F & T & F & T \\ \hline
+     F & F & T & T & F & F & F & T \\ \hline
+     F & F & F & T & T & T & T & T \\ \hline
+\end{tabular}
+
+Tautology 
+\item
+\begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    P & Q & $P \oplus Q$ & $\neg Q$ & $(P \oplus Q) \oplus \neg Q$ & $[(P \oplus Q) \oplus \neg Q] \Leftrightarrow P$ \\ \hline
+    T & T & F & F & F & F \\ \hline
+    T & F & T & T & F & F \\ \hline
+    F & T & T & F & T & F \\ \hline
+    F & F & F & T & T & F \\ \hline
+\end{tabular}
+
+Contradiction
+\end{enumerate}
+
+%%Problem 2
+\begin{problem}
+Verify the following statements using only identities (see the list posted on MyCourses). Show all of your work and name the identity or identities used in each step.
+\end{problem}
+
+\begin{enumerate}[label = \alph*)]
+\item $[(P \Rightarrow Q) \wedge P] \Rightarrow Q$ is a tautology
+
+\item $\neg (P \wedge Q) \wedge (Q \Rightarrow P) \equiv \neg Q$
+
+\item $\neg [(P \vee Q) \vee [(Q \vee \neg R) \wedge (P \vee R)]] \equiv \neg P \wedge \neg Q$
+\end{enumerate}
+
+\begin{solution}
+\end{solution}
+
+\begin{enumerate}[label = \alph*)]
+    \item 
+    \begin{align*}
+        [(P \Rightarrow Q) \wedge P] \Rightarrow Q &\equiv [(\neg P \vee Q) \wedge P] \Rightarrow Q   &\text{(Conditional)} \\
+         &\equiv [P \wedge (\neg P \vee Q)] \Rightarrow Q  &\text{(Commutative)}    \\
+         &\equiv [(P \wedge \neg P) \vee (P \wedge Q)] \Rightarrow Q &\text{(Distributive)} \\
+         &\equiv [FF \vee (P \wedge Q)] \Rightarrow Q &\text{(Complement)} \\
+         &\equiv (P \wedge Q) \Rightarrow Q &\text{(Identity)} \\
+         &\equiv \neg (P \wedge Q) \vee Q &\text{(Conditional)} \\
+         &\equiv (\neg P \vee \neg Q) \vee Q &\text{(DeMorgan's)} \\
+         &\equiv \neg P \vee (\neg Q \vee Q) &\text{(Associative)} \\
+         &\equiv \neg P \vee T &\text{(Complement)} \\
+         &\equiv T &\text{(Domination)}
+    \end{align*}
+    Therefore, $[(P \Rightarrow Q) \wedge P] \Rightarrow Q$ is a tautology (always true).
+   
+    \item
+    \begin{align*}
+        \neg (P \wedge Q) \wedge (Q \Rightarrow P) &\equiv \neg Q \\
+        &\equiv (\neg P \vee \neg Q) \wedge (Q \Rightarrow P) &\text{(DeMorgan's)} \\
+        &\equiv (\neg P \vee \neg Q) \wedge (\neg Q \vee P) &\text{(Conditional)} \\
+        &\equiv (\neg Q \vee \neg P) \wedge (\neg Q \vee P) &\text{(Commutative)} \\
+        &\equiv \neg Q \vee (\neg P \wedge P) &\text{(Distributive)} \\
+        &\equiv \neg Q \vee F &\text{(Complement)} \\
+        &\equiv \neg Q &\text{(Identity)} \\
+        \neg Q &\equiv \neg Q
+    \end{align*}
+    
+    \item
+    \begin{align*}
+        \neg [(P \vee Q) \vee [(Q \vee \neg R) \wedge (P \vee R)]] &\equiv \neg P \wedge \neg Q \\
+        &\equiv \neg[(P\vee Q) \vee [(Q \wedge P) \vee (Q \wedge R) \vee (\neg R \wedge P) \vee (\neg R \wedge R)] &\text{(Distributive)}\\
+        &\equiv \neg[(P \vee Q) \vee [(P \wedge Q) \vee (Q \wedge R) \vee (\neg R \wedge P) \vee F]] &\text{(Commutative, Complement)}\\
+        &\equiv \neg [(P \vee Q) \vee (P \wedge Q) \vee (Q \wedge R) \vee (\neg R \wedge P)] &\text{(Associative, Identity)}\\
+        &\equiv \neg[(P\vee Q)\vee (Q \wedge R) \vee (\neg R \wedge P)] &\text{(Absorption)}\\
+        &\equiv \neg(P\vee Q)\wedge \neg(Q\wedge R)\wedge \neg(\neg R \wedge P) &\text{(DeMorgan's)}\\
+        &\equiv (\neg P \wedge \neg Q) \wedge (\neg Q \vee \neg R) \wedge (R \vee \neg P) &\text{(DeMorgan's)}\\
+        &\equiv (\neg P \wedge \neg Q) \wedge (R \vee \neg P) &\text{(Idempotent)}\\
+        &\equiv (\neg P \wedge \neg Q) &\text{(Idempotent)}\\
+        \neg P \wedge \neg Q &\equiv \neg P \wedge \neg Q &\text{(Associative)}
+    \end{align*}
+\end{enumerate}
+
+%%Problem 3
+\begin{problem}
+Of the following conditional and biconditional statements, which are true and which are false? Briefly justify your answers.
+\begin{enumerate}[label = \alph*)]
+    \item $\pi$ is an integer if and only if $\sqrt{e+3}$ is a vowel.
+    
+    \item $0>1$ whenever $2+2=4$
+    
+    \item If (a) implies (b), then pigs cannot fly.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+
+\begin{enumerate}[label = \alph*)]
+    \item 
+    P: $\pi$ is an integer; Q: $\sqrt{e+3}$ is a vowel\\
+    ``if and only if" indicates a biconditional statement: $P \Leftrightarrow Q$ \\
+    $pi$ is an irrational number, and therefore not an integer (P is \textbf{false}). $\sqrt{e+3}$ is also an irrational number, and therefore not a vowel (Q is \textbf{false}). \\
+    In order for a biconditional statement to be true, the truth values of P and Q must be the same. As both atoms in this sentence are false (same truth value), the statement is \textbf{true}.
+    
+    \item 
+    Q: 0>1; P: 2+2=4\\
+    Whenever indicates a conditional statement: $P \Rightarrow Q$ \\
+    0 is not greater than one, therefore Q is \textbf{false}. 2+2=4 is a true statement, therefore P is \textbf{true}. $P\Rightarrow Q$ is true in the event that either P is false (not satisfied) or Q is true (not satisfied). Neither condition is satisfied, so the statement is \textbf{false}.
+    
+    \item
+    A: A, B: B, P: Pigs can fly \\
+    ``If" and ``implies" both indicate conditional statements: $(A\Rightarrow B) \Rightarrow \neg P$ \\
+    Pigs are unable to fly, therefore P is \textbf{false} all of the time ($\neg P$, or the right half of the conditional is \textbf{true}. However, $(A\Rightarrow B)$ cannot be proven true (as it is a conditional, not biconditional statement) or false (would be proven only if the right half of the conditional $(\neg P)$ was false, and it is true). Therefore, the truth of the sentence \textbf{cannot be determined}.
+    
+\end{enumerate}
+
+%%Problem 4
+\begin{problem}
+Symbolize the following English sentences in logic, using the abbreviation scheme provided.
+\begin{enumerate}[label = \alph*)]
+    \item ``Thunder only happens when it's raining." \\
+    T: thunder happens; R: it's raining
+    
+    \item ``For every positive integer $n$ there is a prime number that is bigger than $n$ but at most $2n$ \\
+    I(x): x is a positive integer; P(x): x is a prime number; B(x,y): x is bigger than y
+    
+    \item ``Golbach's Conjecture is true if every even integer greater than 2 can be written as the sum of two primes." \\
+    G: Goldbach's Conjecture is true; E(x): x is an even integer; T(x): x is greater than 2; P(x): x is the sum of two primes.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+
+\begin{enumerate}[label = \alph*)]
+    \item 
+    $R \Rightarrow T$ \\
+    ``T only when R" can be rewritten as ``R implies T", indicating a conditional statement.
+    
+    \item
+    $\forall x (I(x) \Rightarrow \exists y ( P(y) \wedge B(y, x) \wedge B(2x+1, y)))$\\
+    $\forall x$ : ``for all values of x..."\\
+    $(I(x)\rightarrow )$ : ``if x is an even integer, then..."\\
+    $\exists y$ : ``there exists an integer y such that..."\\
+    $P(y) \wedge$ : ``y is prime and..."\\
+    $B(y,x) \wedge$ : ``y is greater than x and..."\\
+    $B(2x+1, y)))$ : ``y is at most 2x (less than 2x+1)'' \\
+    Rewritten: ``For all values of x, if x is an even integer, then there exists an integer y such that y is prime, greater than x, and less than 2x+1"
+    
+    \item
+    $\forall x ((E(x) \wedge T(x)) \Rightarrow P(x)) \Rightarrow G$\\
+    $\forall x$ : ``For all values of x..."\\
+    $((E(x) \wedge T(x))$ : ``If x is an even integer greater than two..."\\
+    $\Rightarrow P(x))$ : ``Implies that x can be written as the sum of two prime numbers..." \\
+    $\Rightarrow G$ : ``Then Goldbach's Conjecture is true."\\
+    Rewritten: ``For all values of x, if x is an even integer greater than two implies that x can be written as the sum of two numbers, then Goldbach's Conjecture is true."
+\end{enumerate}
+
+\end{document}

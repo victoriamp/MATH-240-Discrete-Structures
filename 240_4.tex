@@ -1,0 +1,174 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin = .25in}
+\usepackage{amsmath, amsthm, amssymb, enumitem}
+\usepackage{etoolbox}
+\newtheorem{problem}{Problem}
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+
+\title{Math 240 (Discrete Structures 1) Assignment 4}
+\author{Victoria Pittard, ID 260762268}
+\date{\today}
+
+\maketitle
+
+%problem 1
+\begin{problem}
+\textbf{Division algorithm}\\
+The division algorithm states that for any $a, b \in \mathbb{Z} (b\neq 0)$ there exist $q, r in \mathbb{Z}$ such that $a=qb+r$ and $0\leq r < |b|$; furthermore, these q, r are unique for a, b. We proved this when $a,b>0$. Prove that q, r exists for all a, b. Hints: (1) You may use the fact that the statement holds when $a,b>0$ as a tool without proving it and (2) you will need to consider cases.
+\end{problem}
+
+\begin{solution}
+
+The proof of the division algorithm requires four separate cases: when $a,b>0$, when $a=0$, when $a>0$ and $b<0$, and when $a,b<0$. Note that as b cannot equal 0, no proof is needed for such a case.\\
+\textbf{Case 1: $a,b>0$}\\ $a,b>0$, then $a=qb+r$, $0\leq r < b$, as was proven for this specific case in class. Additionally, the uniqueness of q and r (in all cases) was proven in class.\\
+\textbf{Case 2: $a=0$}\\In the case that a is equal to zero, this holds true when q=r=0, regardless of b (b is multiplied by q, and if q is zero then that term is zero, which remains zero when r=0 is added to it).\\
+\textbf{Case 3: $a<0, b>0$}\\From Case 1, we know that for integers a and b, where both are greater than 0, $\exists q', r' \in \mathbb{Z}$ such that $a=q'b+r'$, $0\leq r' < b$. As a is positive in this case, $a=q'b+r' \equiv |a|=q'b+r'$.\\
+In the case that a is less than zero and b is greater than zero,
+\begin{align*}
+   |a|&=-a \\
+   a&=-|a|\\
+   a&=-(q'b+r')     &\text{  from } |a|=q'b+r\\
+   a&= b(-q') + (-r')
+\end{align*}
+\textit{Let r' = 0:}\\
+$q=-q', r=0$, then $a=qb+r, 0\leq r < |b|$,\\
+or else: $0<r<b \implies 0<b-r'<b$\\
+a=b(-q')+(-r')\\
+a=b(-q')-b+b-r'\\
+a=b(-1-q') + (b-r')\\
+In this case, q= -q-q', r=b-r', then $a=qb+r, 0\leq r < |b|$\\
+\textbf{Case 4: $b<0$}\\
+From Case 1, we know that for integers a and b, where both are greater than 0, $\exists q', r' \in \mathbb{Z}$ such that $a=q'b+r'$, $0\leq r' < b$. As b is positive in this case, $a=q'b+r' \equiv a=q'|b|+r'$, and $0\leq r'<b \equiv 0\leq r'<|b|$.\\
+In the case that b is less than zero,
+\begin{align*}
+    |b|&=-b>0\\
+    a&=q'(-b)+r'     &\text{  from } a=q'|b|+r\\
+    a&=(-q')b+r'
+\end{align*}
+Thus, if q= -q', r = r', then $a=qb+r, 0\leq r<|b|$ is satisfied when $b<0$.\\ 
+\textbf{Conclusion: }As shown above, the division algorithm holds true for all cases where $b\neq 0$.
+\end{solution}
+
+%problem 2
+\begin{problem}
+\textbf{Divisors}
+\begin{enumerate}[label = \alph*)]
+    \item Find gcd(2018, 240), and express your answer as a linear combination of 2018 and 240 (that is, $r, s \in \mathbb{Z}$ such that gcd(2018, 240) = 2018r + 240s).
+    
+    \item Let $k$ be a positive integer. Show that if a and b are relatively prime integers, then gcd(a+kb, b+ka) divides $k^2-1$. Hint: consider two linear combinations of a+kb and b+ka.
+    
+    \item Suppose $n, m, p \in \mathbb{N}, p$ a prime, where $p|n, m| n,$ and $p\nmid m$. Either prove that p divides $\frac{n}{m}$ or provide a counterexample to show that it doesn't. Make sure to address whether or not "p divides $\frac{n}{m}$ even makes sense.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+
+\begin{enumerate}[label=\alph*)]
+\item
+Through the Euclidean Algorithm, proved in class, the gcd of 2018 and 240 can be found:
+\begin{align*}
+    2018&=240(8)+98\\
+    240&=98(2)+44\\
+    98&=44(2)+10\\
+    44&=10(4)+4\\
+    10&=4(2)+2\\
+    4&=2(2)+0
+\end{align*}
+Thus, the greatest common divisor of 2018 and 240 is 2.\\
+The statements found above through the Euclidean Algorithm can be rearranged, as follows:
+\begin{align*}
+    89&=2018-8(240)\\
+    44&=240-2(98)\\
+    10&=98-2(44)\\
+    4&=44-4(10)\\
+    2&=10-2(4)
+\end{align*}
+From here, 2 (the greatest common divisor) can be isolated and rewritten through back substitution using the above equations:
+\begin{align*}
+    2&=10-2(44-4(10))\\
+    &=10-2(44)+8(10)\\
+    &=-2(44)+9(10)\\
+    &=-2(444)+9(98-2(44))\\
+    &=9(98)-20(44)\\
+    &=9(98)-20(240-2(98))\\
+    &=-20(240)+49(98)\\
+    &=-20(240)+49(2018-8(240))\\
+    &=49(2018)-412(240)
+\end{align*}
+As shown above, the greatest common divisor of 2018 and 240 is 2, and can be written as $49(2018)-412(240)$.
+
+\item
+Since a and b are relatively prime, it can be concluded that gcd(a,b) = 1. $\implies k>0$, $gcd(a,b)=1$.\\
+From this, $xa+yb=1$, where x and y are both integers.\\
+$gcd(a+kb, b+ka) \mid a+kb$ and $gcd(a+kb, b+ka) \mid b+ka$\\
+From the above statement, we can conclude that $gcd(a+kb, b+ka) | q(a+kb) + r(b+ka)$, where q and r are integers (using a Lemma proved in class).\\
+If we let q = k, and r=-1, then we can conclude that $gcd(a+kb, b+ka) \mid [k(a+kb)-(b+ka)]=b(k^2-1)$\\
+If we let q=-1, and r=k, then we can conclude that $gcd(a+kb, b+ka) \mid [-(a+kb)+k(b+ka)]=a(k^2-1)$\\
+From the above two scenarios, it can be concluded that if $gcd(a,b)=1$ (a and b are relatively prime integers), then $gcd(a+kb, b+ka) \mid k^2-1$.
+
+\item
+Since $p \nmid m$, p and m are relatively prime integers, and their greatest common divisor equals 1. From this, $mx + py = 1$, where x and y are both integers.\\
+According to a theorem shown in class, even though p does not divide m, since p divides n and m divides n, n/m can still be reduced to an integer that p can divide in multiple cases, thus the assumption that $p|\frac{n}{m}$ makes sense.\\
+We know that $\frac{n}{m} \in \mathbb{N}$, as m divides n and both n and m fall in the set of natural numbers.\\
+As $\frac{n}{m} \in \mathbb{N}$ and gcd(m,p)=1, we know that $\frac{n}{m} = nx + py(\frac{n}{m})$.\\
+Since p divides p and p divides n, this can be written as $p[x(n)+\frac{ny}{m}(p)]$, which then implies that p divides $\frac{n}{m}$.
+
+\end{enumerate}
+\end{solution}
+
+%Problem 3
+\begin{problem}
+\textbf{Congruence and modular arithmetic}
+\begin{enumerate}[label = \alph*)]
+    \item Let $k \in \mathbb{Z}\setminus \{0\}$. Prove that $ka\equiv kb$ (mod kn) if and only if $a\equiv b$ (mod n).
+    
+    \item Prove that if $a\equiv b$ (mod n), then gcd(a, n) $\equiv$ gcd(b, n)
+    
+    \item Show that $1806^{6236} \equiv 1$ (mod 17).
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{(Left to Right)}\\
+    $a\equiv b$ mod n $\implies n \mid (b-a)$
+    \begin{align*}
+        (b-a)&=xn\\
+        k(b-a)&=k(xn)\\
+        k(b-a)&=x(kn)
+    \end{align*}
+    This implies that $kn \mid k(b-a) \implies kn \mid kb-ka$, or $ka\equiv kb$ mod kn\\
+    \textbf{(Right to Left)}\\
+    $ka\equiv kb$ mod kn $\implies kn \mid kb-ka$
+    \begin{align*}
+        kb-ka&=x(kn)\\
+        k(b-a)&=k(xn)\\
+        b-a&=xn
+    \end{align*}
+    This implies that n divides b-a, which is equivalent to saying that $a\equiv b$ mod n.
+    
+    \item
+    $a\equiv b$ mod n $\implies n \mid a-b$\\
+    a-b=nx\\
+    Let d = gcd(a, n); c = gcd(b, n)\\
+    $\frac{a}{d}=\frac{nx}{d} - \frac{b}{d} \implies \frac{-a}{d} + \frac{nx}{d} = \frac{b}{d} \implies d \mid b \implies d\leq c$\\
+    $\frac{b}{c}=\frac{nx}{c} - \frac{a}{c} \implies \frac{-b}{c} + \frac{nx}{c} = \frac{a}{c} \implies c \mid a \implies c\leq d$\\
+    As c is less than or equal to d, and d is less than or equal to c, as shown above, we know that c is equal to d. As gcd(a,n) = c = d = gcd(b,n), through transitivity we know that gcd(b,n)=gcd(a,n) when $a\equiv b$ mod n.
+    
+    \item
+    \begin{align*}
+        1806 &\equiv 4 mod 17\\
+        1806^2 &\equiv 16 mod 17 &\text{both sides $^2$}\\
+        1806^2 &\equiv -1 mod 17 &\text{-1/17 has a remainder equal to that of 16/17}\\
+        1806^4&\equiv 1 mod 17 &\text{both sides $^2$}\\
+        1806^{6236} &\equiv 1 mod 17 &\text{both sides $^{1559}$}
+    \end{align*}
+\end{enumerate}
+\end{solution}
+
+\end{document}

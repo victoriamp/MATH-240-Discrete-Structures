@@ -1,0 +1,188 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin = .25in}
+\usepackage{amsmath, amsthm, amssymb, enumitem}
+\usepackage{etoolbox}
+\newtheorem{problem}{Problem}
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+
+\title{Math 240 (Discrete Structures 1) Assignment 5}
+\author{Victoria Pittard, ID 260762268}
+\date{\today}
+
+\maketitle
+
+%Problem 1
+\begin{problem}\textbf{Solving Equations}\\
+For each equation, either find all solutions or explain why none exist.
+\begin{enumerate}[label=\alph*)]
+    \item $235x\equiv 12$ (mod 243)
+    
+    \item $235x\equiv 12$ (mod 245)
+    
+    \item $235x\equiv 10$ (mod 245)
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\begin{enumerate}[label = \alph*)]
+    \item
+    $235 = 5*47$, $243 = 3^5 \implies gcd(235,243)=1$. As such, 235 and 243 are relatively prime and solutions exist.\\
+    Through the Euclidean Algorithm and Back Substitution, we can find $235^{-1}$\\
+    Euclidean Algorithm:
+    \begin{align*}
+        243&=1(235)+8\\
+        235&=29(8) + 3\\
+        8&=2(3)+2\\
+        3&=1(2)+1\\
+    \end{align*}
+    Back substitution:
+    \begin{align*}
+        1&=3-1(8-2(3))\\
+        &=3(3)-8\\
+        &=3(235-29(8))-8\\
+        &=3(235)-88(8)\\
+        &=3(235)-88(243-235)\\
+        &=91(235)-88(243)
+    \end{align*}
+    $\therefore 235^{-1} \equiv 91$ mod 243
+    \begin{align*}
+        x\equiv 12(235^{-1}) mod 243\\
+        x\equiv 12(91) mod 243\\
+        x\equiv 1092 mod 243\\
+        x\equiv 120 mod 243
+    \end{align*}
+    As shown above, it can therefore be determined that $x\equiv 120$ mod 243 (in other words, x = 120 + 243c, where c is an integer).
+    
+    \item
+    $235 = 5 * 47$, $245 = 5* 7^2 \implies gcd(235,245) = 5$\\
+    $12\equiv 2 mod 5$ (as such, 5 does not divide 12), so there is \textbf{no solution}.
+    
+    \item
+    $235 = 5 * 47$, $245 = 5* 7^2 \implies gcd(235,245) = 5$. 5 divides 10, so the modular equation can be rewritten as $235x/5 \equiv 10/5 mod 245/5$, or $47x\equiv 2 mod 49$. The greatest common divisor of 47 (47) and 49 ($7^2$) is 1, therefore solutions do exist.\\
+    Through the Euclidean Algorithm and back substitution, we can find $47^{-1}$.\\
+    Euclidean Algorithm:
+    \begin{align*}
+        49&=1(47)+2\\
+        47&=23(2)+1
+    \end{align*}
+    Back Substitution:
+    \begin{align*}
+        1&=47-23(49-47)\\
+        &=24(47)-23(49)\\
+    \end{align*}
+    As this is mod 49, any multiple of 49 (such as: $-23(49)$) is equivalent to 0, as there is no remainder. Thus, this can be rewritten as $1\equiv 24(47) mod 49$, and it can be determined that the inverse of 47 is $24 mod 49$
+    \begin{align*}
+        x\equiv 2(47^{-1}) mod 49\\
+        x\equiv 2(24) mod 49\\
+        x\equiv 48 mod 49
+    \end{align*}
+    As shown above, it can therefore be determined that $x\equiv 48$ mod 49 (in other words, x = 48 + 49c, where c is an integer).
+\end{enumerate}
+\end{solution}
+
+%Problem 2
+\begin{problem}\textbf{Congruence}\\
+There is a divisibility rule for dividing an integer n by 11:\\
+Label the digits (starting with the ones place and moving right to left) with the labels 0, 1, 2, ... and so on. Sum the digits with even labels, sum the digits with the odd labels, and subtract one sum from the other. The result is divisible by 11 if and only if n is divisible by 11.\\
+Prove this rule is correct.
+\end{problem}
+\begin{solution}
+Let $a_0$ = the digit in the ones place ($10^0$), $a_1$ = the digit in the tens place ($10^1$)... $a_k$ represent the digit in the $10^k$ place (thus labeling the digits, starting with the ones and moving right to left, with labels starting at 0) for all digits in an integer \textit{n}.\\
+As a result, \textit{n} can be written as $10^ka_k + 10^{k-1}a_{k-1} + ... + 10^0a_0$.\\
+We know that $10\equiv -1$ mod 11, and can therefore rewrite this statement as \textit{n} $=(-1)^ka_k + (-1)^{k-1}a_{k-1} + ... + (-1)^0a_0$ mod 11.\\
+As -1 raised to an even exponent (0, 2, 4, ...) gives 1, digits with even labels (ones, hundreds, etc.) are summed. As -1 raised to an odd exponent (1, 3, 5, ...) gives -1, digits with odd labels (tens, thousands, etc.) are subtracted from the first sum. Thus, if $n\equiv 0 mod 11$, this alternating sum of digits will also $\equiv 0 mod 11$. Likewise, if the alternating sum of digits $\equiv 0 mod 11$, $n\equiv 0 mod 11$, as we know that the alternating sum of the digits is equal to \textit{n}.
+\end{solution}
+
+%Problem 3
+\begin{problem}\textbf{Cryptography}\\
+You have stumbled across a (bad) RSA encryption system with public key $n=221$, $e=113$.
+\begin{enumerate}[label=\alph*)]
+    \item Find primes p,q such that $n=pq$.
+    
+    \item You interpret the messsage E=2. Decode it using the single private key \textit{d} as described in the handout.
+    
+    \item Decode E using two private keys and the Chinese Remainder Theorem as described in the handout.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\begin{enumerate}[label=\alph*)]
+    \item $221=13*17$, thus p=13, q=17. 13 = 13, 17 = 17 (after prime factorization), therefore both p and q are prime.
+    
+    \item To find the private key \textit{d}, find $e^{-1} mod (p-1)(q-1)$ using the Euclidean Algorithm and Back Substitution\\
+    $e^{-1}$ mod 192\\
+    Euclidean Algorithm:
+    \begin{align*}
+        192&=1(113)+79\\
+        113&=1(79)+34\\
+        79&=2(34)+11\\
+        34&=3(11)+1
+    \end{align*}
+    Back Substitution:
+    \begin{align*}
+        1&=34-3(79-2(34))\\
+        &=7(34)-3(79)\\
+        &=7(113-79)-3(79)\\
+        &=7(113)-10(79)\\
+        &=7(113)-10(192-113)\\
+        &=17(113)-10(192)
+    \end{align*}
+    $\therefore e^{-1}\equiv 17 mod 192\implies d=17$\\
+    We know that the message M can be written as $M\equiv E^d mod n$:
+    \begin{align*}
+        M&\equiv E^d mod n\\
+        &\equiv 2^{17} mod n\\
+        &\equiv 131072 mod n\\
+        &\equiv 19 mod 221
+    \end{align*}
+    $\therefore$ the message \textbf{M is 19}.
+    
+    \item 
+    To find the private key $d_1$, find $e^{-1} mod (p-1)$, and to find $d_2$, find $e^{-1} mod (q-1)$.\\
+    %%For $d_1$, find $113^{-1} mod 12$ using the Euclidean Algorithm and Back Substitution. This works because the greatest common divisor of 113 and 12 is 1 (as 113 is prime and greater than 12).\\
+    Euclidean Algorithm:
+    \begin{align*}
+        113&= 9(12)+5\\
+        12&=2(5)+2\\
+        5&=2(2)+1
+    \end{align*}
+    Back Substitution:
+    \begin{align*}
+        1&=5-2(12-2(5))\\
+        1&=5(5)-2(12)\\
+        1&=5(113-9(12)-2(12)\\
+        1&=5(113)-47(12)
+    \end{align*}
+    Therefore, $d_1=5$\\
+    We know that $M\equiv E^{d_1} mod p$
+    \begin{align*}
+        M&\equiv 2^5 mod 13\\
+        &\equiv 32 mod 13\\
+        &\equiv 6 mod 13
+    \end{align*}
+    
+    For $d_2$, find $113^{-1} mod 16$ using the Euclidean Algorithm and Back Substitution. This works because the greatest common divisor of 113 and 16 is 1 (as 113 is prime and greater than 16).\\
+    Euclidean Algorithm:
+    \begin{align*}
+        113&=7(16)+1\\
+        1&=1(113)-7(16)
+    \end{align*}
+    As the first line of the Euclidean Algorithm had a remainder of 1 (could be expressed as 1, the greatest common divisor of 113 and 16), back substitution is not needed. From the above math, we can see that $d_2=1$.\\
+    We know that $M\equiv E^{d_2} mod q$
+    \begin{align*}
+        M&\equiv 2^1 mod 17\\
+        &\equiv 2 mod 17
+    \end{align*}
+    
+    As shown above, $M\equiv 2 mod 17$ and $M\equiv 6 mod 13$. As 13 and 17 are both prime numbers, they are relatively prime. Thus, using the Chinese Remainder Theorem, we can rewrite M based on the above two equations:\\
+    $M\equiv4*13*2 + -3*17*6$ mod 221\\
+    $M\equiv104-306$ mod 221\\
+    $M\equiv -202$ mod 221\\
+    $M\equiv 19$ mod 221, thus we know that the message \textbf{M is 19}.
+\end{enumerate}
+\end{solution}
+
+\end{document}

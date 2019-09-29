@@ -1,0 +1,179 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin = .25in}
+\usepackage{amsmath, amsthm, amssymb, enumitem}
+\usepackage{etoolbox}
+\newtheorem{problem}{Problem}
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+
+\title{Math 240 (Discrete Structures 1) Assignment 7}
+\author{Victoria Pittard, ID 260762268}
+\date{\today}
+
+\maketitle
+
+%Problem 1
+\begin{problem}\textbf{Combinatorics. }
+Three families have decided to go on vacation together. Family A has 1 adult and 2 children. Family B has 3 adults and 6 children, and Family C has 2 adults and 4 children:
+\begin{enumerate}[label = \alph*)]
+    \item It's time to board the plane! In how many ways can the whole group line up together to present their tickets if every family must stay together?
+    
+    \item Five rooms have been reserved for the families at their hotel. In how many ways can the rooms be assigned if no more than 4 people are allowed in a room? What if we require at least one adult in each room?
+    
+    \item For each of the five days the families are on vacation, they will be given a stack of 18 towels. Each family will get their towels in a matching colour and no two families have the same colour on the same day. How many different ways could the towels be presented to them over the five days if the hotel carries 7 different colours of towel? What if Family A insists that it does not receive the same colour on consecutive days?
+    
+    \item This afternoon, the families have a chance to go on an excursion. In how many ways could a group be formed to go if it must have at least 2 adults and 2 children?
+    
+    \item It's dinner time. A large circular table is reserved to seat all 18 vacationers. How many different seating arrangements are there if rotations are ignored? In other words, if everyone seated gets up and moves k seats to the left, it's still considered the same seating arrangement. What if the children from Family B insist on sitting consecutively?
+    
+    \item It's time for the stage show! A hypnotist invites 5 of the vacationers onstage to occupy 5 chairs. How many possible seating arrangements are there? What if we insist that at least one member from each family must go on stage?
+    
+    \item Time for the vacation photo! Unfortunately, Family C has had a falling out over who was to blame for puncturing the inflatable unicorn in the pool. How many ways can the vacationers line up for the photo if no two members of Family C are next to one another?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+\begin{enumerate}[label = \alph*)]
+    \item 
+    As there are three families, if you ignore the order within the families, the families can stand in $3!$ orders. Within family A, there are 3 members, so there are 3! orders that family A can stand in. Within family B, there are 9 members, so there are 9! orders that family B orders that family B can stand in. Within family C, there are 6 members, so there are 6! orders that family C can stand in. As A, B, and C can have their members in any of these orders, and are in any order relative to the other families, there are $3!3!9!6!$ orders that they can stand in. This is equal to \textbf{9405849600 possible orders}.
+    
+    \item
+    \textbf{Part 1}\\
+    There are 5 rooms, each with a capacity of 4 people (holds 20 people total) and 18 people staying in these rooms. When putting 18 people in the rooms, there are at least 3 full rooms (4 people). Thus, there are two main cases: three rooms of four and two of three, and four rooms of four and a room of two (the possibilities of each case should be added, as one OR the other occurs). \\
+    \emph{Case 1:} As there are 18! ways for the people, but as there is no order within rooms, this must be divided by $(3!)^2(4!)^3$, as there are 2 rooms of 3 and 3 rooms of 4. This then should be multiplied by $\binom{5}{2}$, or $\frac{5!}{2!3!}$. This leaves $\frac{18!5!}{(3!)^3(4!)^3(2!)}$\\
+    \emph{Case 2:} As there are 18! ways for the people, but as there is no order within rooms, this must be divided by $(2!)(4!)^4$, as there is one room of two and four rooms of four. This should then be multiplied by $\binom{5}{1}$ or $\frac{5!}{1!4!}$. This leaves $\frac{18!5!}{2!(4!)^5}$\\
+    By adding the two cases (shown above), you get $\frac{18!5!}{(3!)^3(4!)^3(2!)} + \frac{18!5!}{2!(4!)^5}$ ($1.76891715*10^11$ possibilities).\\
+    
+    \textbf{Part 2}\\
+    There are 6 adults, so they can be ordered in 6! ways, but as one of the rooms has 2 adults and order doesn't matter, this must be divided by 2!. The possibilities for the room with 2 adults are represented by $\binom{5}{1}$, so this should be  multiplied. This results in $\frac{6!}{2!}\binom{5}{1}$ or $\frac{6!5!}{2!4!}$
+    There are 12 children (remaining people), and as there can't be more than 4 people in the room, there are three possible numbers of children: 2 3 3 2 2 (with the adults split 2 1 1 1 1), 2 3 3 3 1 (with the adults split 2 1 1 1 1), 3 3 3 3 0 (with the adults split 1 1 1 1 2). \\
+    \emph{Case 1:} As there are 12! ways for the people, but as there are no orders within rooms, this must be divided by $(2!)^3(3!)^2$, as there are 2 rooms with three people and three rooms with two people $\implies \frac{12!}{(2!)^3(3!)^2}$ \\
+    \emph{Case 2:} As there are 12! ways for the children, but no orders within rooms, this must be divided by $(2!)(3!)^3$, as there is one room with two children, three rooms of three children, and one room with one child (1! = 1) $\implies \frac{12!}{(2!)(3!)^3}$\\
+    \emph{Case 3:} As there are 12! ways for the children, but no orders within rooms, this must be divided by $(3!)^4$ as there are four rooms with three children $\implies \frac{12!}{(3!)^4}$\\
+    The total number of possibilities is the sum of each case for the children (as only one of them occurs) multiplied by the possibilities for the adults to be arranged (as both the children and adults have various options). This results in $ \frac{6!5!}{2!4!}(\frac{12!}{(2!)^3(3!)^2} + \frac{12!}{(2!)(3!)^3} + \frac{12!}{(3!)^4})$ ($5.65488*10^9$ possibilities).
+    
+    \item
+    \textbf{Part 1}\\
+    There are 7 possible towel colors, but only 3 are needed. This should be multiplied by 5 because there are 5 days. $\implies \frac{5*7!}{4!}$. The towels can then be ordered in 18! ways, but as 3 are color A, 9 are color B, and 6 are color C, this should be divided by $3!9!6!$. Thus, the total number of ways the towels can be presented is $\frac{5*7!*18!}{4!3!9!6!}$ (or $4.288284 * 10^9$).\\
+    \textbf{Part 2}\\
+    The same process as part 1 may be followed for the first day, but afterwards family A cannot have the same color towel as the day before, so instead of $\frac{7!}{4!}$, there are $\frac{6*6!}{4!}$ color combinations for the towels. Thus, the towels can be presented in $\frac{7!18!}{4!3!9!6!}+4\frac{6*6!*18!}{4!3!9!6!}$ ways (or $3.7981944 * 10^9$).
+    
+    \item
+    The group going on the excursion needs at least 2 adults and 2 children, thus the group consists of every combination of 2-6 adults and 2-12 children (55 options total). Thus, when you account for number of adults and children to choose from the total number of arrangements is $\sum_{a=1}^6\sum_{c=2}^12\binom{6}{a}\binom{12}{c}$, or $\sum_{a=1}^6\sum_{c=2}^12 \frac{12!6!}{(12-c)!(6-a)!(a!c!)}$, where a is the number of adults on the excursion and c is the number of children on the excursion.
+    
+    \item
+    \textbf{Part 1}\\
+    There are 18! ways to order the people in a line around a circular table. However, as rotations do not count as separate orders, there are 17! ($3.55687428096*10^14$) ways to order the people, as the first person to be seated can sit anywhere (18), but it will be indexed as the first seat regardless.\\
+    \textbf{Part 2}\\
+    As family B's children sit together, it is as if there are 13 seats, with the 6 children in one seat. The 6 children can be ordered in 6! ways, and treating them as one group and every other individual as one group, the groups can be seated in (13-1)! or 12! ways. Thus, there are $12!6!$ ($3.44881152*10^11$) ways to seat everyone.
+
+    \item
+    The 5 people the hypnotist selects (regardless of order) have $\frac{18!}{13!5!}$ possibilities. The order they sit in has 5! possibilities, thus there are $\frac{18!}{13!}$ ($1028160$) possibilities.
+    
+    \item
+    There are 12! ways for families A and B to stand, $\binom{13}{6}$, or $\frac{13!}{6!7!}$ ways for family C to stand within the other families, and 6! ways the members of family C can stand relative to one another. Thus, there are $\frac{12!13!}{7!}$ ($5.91816056832*10^14$)ways to stand for the picture.
+    
+    
+\end{enumerate}
+
+%Problem 2
+\begin{problem}\textbf{More Combinatorics. }
+Consider the unit grid (on assignment, each square has unit length). A path between two points is a sequence of line segments which follow the grid (an example is shown). 
+
+\begin{enumerate}[label = \alph*)]
+    \item How many paths are there from A to D if you can only move right or up?
+    
+    \item How many of the paths from (a) pass through the point B?
+    
+    \item How many paths from (a) have the property that every vertical segment has length exactly 1?
+    
+    \item How many paths are there from A to D if you never move left and your path never revisits itself?
+    
+    \item How many paths from (d) are there which pass through C?
+    
+    \item How many paths from (d) have the property that you use exactly 5 horizontal line segments?
+    
+    \item How many paths from (f) have the property that no horizontal line segment has length 1?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+\begin{enumerate}[label = \alph*)]
+    \item 
+    To get from A to D, the path must move up a total of 9 spaces and right a total of 14 spaces (23 movements total). As the order in which it moves up and right does not matter, there are $\frac{23!}{14!9!}$ total paths from A to D (817190 paths).
+    
+    \item
+    To get from A to D while passing through B, the path must go from A to B AND then from B to D (multiply possibilities for each). The vertical distance from A to B is 3, and the horizontal distance is 5. The vertical distance from B to D is 6, and the horizontal distance is 9. Thus, there are $\frac{8!}{3!5!}$ ways to get from A to B, and $\frac{15!}{6!9!}$ ways to get from B to D, resulting in $\frac{8!15!}{3!5!6!9!}$ ways to get from A to D while passing through B (280280 paths).
+    
+    \item
+    As each vertical segment must have length one, the path from A to D can be written as -H1-H2-H3-H4-H5-H6-H7-H8-H9-H10-H11-H12-H13-H14-, where each - is either one step up, or not a step. There are 15 possible vertical steps, but only 9 are needed, resulting in $\frac{15!}{9!}{6!}$ paths (5005 paths).
+    
+    \item
+    To get to the second column (relative to A), you have 15 choices (2 down 1 right, 1 down 1 right, 0 down 1 right, ... 12 up 1 right). This pattern follows (different range, but 15 choices to move right one column) for all 14 columns between A and D. Thus, there are $15^{14}$ paths from A to D if you cannot move left.
+    
+    \item
+    C is 8 columns to the right of A. Thus, following the same logic as D, there are $15^8$ ways to get there. As you can't revisit this path, you must consider the ways to get to D with various cases.\\
+    \emph{Case 1 - Approached C from above}\\
+    You must continue downwards or go to the right, giving 14 possibilities to get to the next column rather than 15.
+    \emph{Case 2 - Approached C from the left}\\
+    You have $13^2$ possibilities to get to the next column, as there is no way to revisit the path without going left.\\
+    \emph{Case 3 - Approached C from below}\\
+    You have 2 possibilities to get to the next column rather than 15, as you cannot move downwards.\\
+    To get from the next column to D, there are 5 columns, and therefore $15^5$ possibilities.
+    You must add the possibilities of each case, and multiply them with the possibilities to get from the column after C to D and the possibilities to get from A to C. This results in $15^8(\frac{15}{15}+\frac{14}{15}+\frac{2}{15})15^5$, or $4.022136474609*10^{15}$ possibilities.
+    
+    \item
+    There are $\binom{18}{4}$ ways to choose the horizontal lengths (the lengths must add to 14, there are 5, and the minimum length is 1 $14+5-1 = 18$). You have 15 choices to place the 1st segment, but only 14 for the remaining 4 segments or else they will merge with a previous segment, therefore, there are $\binom{18}{14}*15*14^4$ (or $1.7632944*10^9$) possibilities.
+    
+    \item
+    As the lengths must add to 14, and there are 5 lengths of at least length 2, there are $\frac{12!}{4!12!}$ ways to arrange the horizontal segments, using the same logic from (f), and the $15(14)^4$ from part (f) still holds. Thus, there are $\frac{16!}{12!4!} * 15(14)^4$ (or $1.0487568*10^9$ ) possibilities.
+\end{enumerate}
+
+%Problem 3
+\begin{problem}\textbf{Proving identities. }
+Let $m$ be a fixed positive integer, and let $n$ be an arbitrary integer such that $n\ge m$. Prove\\
+\centerline{$P(n,m)2^{n-m} = \sum^{n}_{k=m}$ $\binom{n}{k}$  $P(k,m)$}
+\begin{enumerate}[label = \alph*)]
+    \item by using a combinatorial argument;
+    
+    \item by using the Binomial Theorem.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+\begin{enumerate}[label = \alph*)]
+    \item
+    \begin{align*}
+        P(n,m)2^{n-m} &= \sum_{k=m}^n \frac{n!}{k!(n-k)!} \times \frac{k}{(k-n)!}\\
+        P(n,m)2^{n-m} &= \sum_{k=m}^n \frac{n!}{(n-k)!(k-m)!}\\
+        P(n,m)2^{n-m} &= \frac{n!}{(n-m)!(m-m)!} + \frac{n!}{(n-(m-1))!((m+1)-m)!} + ... + \frac{n!}{(n-n)!(n-m)!}\\
+        P(n,m)2^{n-m} &= \frac{n!}{(n-m)!}[(n-m)c_0+(n-m)c_1 + ... + (n-m)c_{n-m}]\\
+        P(n,m)2^{n-m} &= P(n,m)\frac{n!}{(n-m)!}[(n-m)c_0+(n-m)c_1 + ... + (n-m)c_{n-m}]\\
+        P(n,m)2^{n-m} &= P(n,m)2^{n-m}
+    \end{align*}
+    
+    \item
+    \begin{align*}
+        P(n,m)2^{n-m} &= \sum_{k=m}^n\binom{n}{k}P(k,m)\\
+        \frac{n!}{(n-m)!}2^{n-m} &= \sum_{k=m}^n \frac{n!k!}{k!(n-k)!(k-m)!}\\
+        2^{n-m} &= \sum^n_{k=m} \frac{(n-m)!}{(n-k)!(k-m)!}\\
+        (1+1)^{n-m} &= \sum^n_{k=m} \frac{(n-m)!}{(n-k)!(k-m)!}\\
+        \sum_{i=0}^{n-m} \binom{n}{i}1^{n-m-i}1^i &= \sum^n_{k=m} \frac{(n-m)!}{(n-k)!(k-m)!}\\
+        \sum_{i=0}^{n-m}\frac{(n-m)!}{i!(n-m-i)!} &= \sum^n_{k=m} \frac{(n-m)!}{(n-k)!(k-m)!}\\
+        \sum_{i=0}^{n-m}\frac{(n-m)!}{(i-m)!(n-m-(i-m))!} &= \sum^n_{k=m} \frac{(n-m)!}{(n-k)!(k-m)!}\\
+        \sum_{i=0}^{n-m}\frac{(n-m)!}{(i-m)!(n-i)!} &= \sum^n_{k=m} \frac{(n-m)!}{(n-k)!(k-m)!}
+    \end{align*}
+    Note that by expanding the right hand side, it can be shown that (n-k) for k from m to n is equivalent to (n-m-i) for i from 0 to n-m (as used on the left hand side), thus, the left and right hand sides are equivalent.
+    
+    
+    
+\end{enumerate}
+
+\end{document}}

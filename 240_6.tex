@@ -1,0 +1,211 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin = .25in}
+\usepackage{amsmath, amsthm, amssymb, enumitem}
+\usepackage{etoolbox}
+\newtheorem{problem}{Problem}
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+
+\title{Math 240 (Discrete Structures 1) Assignment 6}
+\author{Victoria Pittard, ID 260762268}
+\date{\today}
+
+\maketitle
+
+%Problem 1
+\begin{problem}\text{ \\}
+\begin{enumerate}[label=\alph*)]
+    \item Let $a$ be any integer. Prove that $a^n-an+n-1$ is divisible by $(a-1)^2$ when $n\ge 2$.
+    
+    \item We saw in class that
+    \begin{align*}
+        \sum_{k=1}^n k = \frac{n(n+1)}{2}
+    \end{align*}
+    If we look at the following two sums, one might see a pattern emerging: 
+    \begin{align*}
+        \sum_{k=1}^n k(k+1) &= \frac{n(n+1)(n+2)}{3}\\
+        \sum_{k=1}^n k(k+1)(k+2) &= \frac{n(n+1)(n+2)(n+3)}{4}
+    \end{align*}
+    Prove the following, which generalizes the three summations above, for $n\ge 1$ where $m\ge 0$ is some fixed integer.
+    \begin{align*}
+        \sum_{k=1}^n \frac{(k+m)!}{(k-1)!} = \frac{(n+m+1)!}{(n-1)!(m+2)}
+    \end{align*}
+    
+    \item You know about binary representations of integers, and I've asked you to prove things about integers in base 10. Now, show that every positive integer has a factorial representation. That is, prove for every integer $n\ge 1$ we can write
+    \begin{align*}
+        n=\sum_{i=1}^k c_i i!
+    \end{align*}
+    where the integer coefficients $c_i$ satisfy $0\le c_i \le i$ for each $i$
+\end{enumerate}
+\end{problem}
+
+\begin{solution}\text{ \\}
+\begin{enumerate}[label = \alph*)]
+    \item 
+    \textbf{Proof By Induction}\\
+    \textbf{Base Case: $n = 2$}
+    \begin{align*}
+        a^2 - 2a + 2 - 1 &= x(a-1)^2\\
+        a^2 - 2a + 1 &= x(a-1)^2\\
+        (a-1)^2 &= x(a-1)^2\\
+        x&=1
+    \end{align*}
+    As $a^n-an+n-1$ divided by $(a-1)^2$ is 1, and 1 is an integer, the base case holds.\\
+    \textbf{Induction Step}\\
+    Assume that $(a-1)^2$ divides $a^n-an+n+1$, show that this holds for $n=n+1$
+    \begin{align*}
+        a^{n+1}-a(n+1)+(n+1)-1 &= a*a^n-an-a+n\\
+        &=a[a^n-n-1]+n\\
+        &=a[a^n-an-n-1]+n+a^2n\\
+        &=a[a^n-an+n-1]+n+a^2n-2an\\
+        &=a[a^n-an+n-1]+n[a^2-2a+1]
+    \end{align*}
+    As $a^n-an+n-1$ and $a^2-2a+1$ are both divisible by $(a-1)^2$ by the induction hypothesis and base case, respectively, we know that $(a-1)^2$ must divide $x(a^n-an+n-1)+y(a^2-2a+1)$ (as shown in class), where x and y are both integers.\\
+    If we let x equal the integer a, and y equal the integer n, we know the last statement derived in the induction step is divisible by $(a-1)^2$, thus proving the induction step.\\
+    As both the induction step and base case are true, we know this holds true for all $n\ge2$.
+    
+    \item
+    \textbf{Proof by Induction}\\
+    \textbf{Base Case n = 1}
+    \begin{align*}
+        \frac{(m+1)!}{0!} &= \frac{(1+m=1)!}{(1-1)!(m+2)}\\
+        (m+1)! &= \frac{(m+2)!}{m+2}\\
+        (m+1)! &= (m+1)!
+    \end{align*}
+    \textbf{Induction Step}\\
+    Assume that $\sum_{k=1}^n \frac{(k+m)!}{(k-1)!} = \frac{(n+m+1)!}{(n-1)!(m+2)}$\\
+    Show that this holds when n = n+1
+    \begin{align*}
+        \frac{(1+m)!}{(1-1)!} + ... + \frac{(n+m)!}{(n-1)!} + \frac{(n+1+m)!}{(n+1-1)!} &= \frac{(n+1+m+1)!}{(n+1-1)!(m+2)}\\
+        \frac{(n+m+1)!}{(n-1)!(m+2)} + \frac{(n+m+1)!}{n(n-1)!} &= \frac{(n+m+2)!}{n!(m+2)} &\text{by Induction Hypothesis}\\
+        \frac{n(n+m+1)!+(n+m+1)!(m+2)}{n(n-1)!(m+2)} &= \frac{(n+m+2)!}{n!(m+2)}\\
+        \frac{(n+m+1)!(n+m+2)}{n(n-1)!(m+2)} &= \frac{(n+m+2)!}{n!(m+2)}\\
+        \frac{(n+m+2)!}{n!(m+2)} &= \frac{(n+m+2)!}{n!(m+2)}
+    \end{align*}
+    As shown above, both the induction step and base case are true, thus we know that this holds true for all $n\ge 1$.
+    
+    \item
+    $n=\sum_{i=1}^k c_i i!$ can be expanded and written as $n=c_11!+c_22!+...+c_kk!$\\
+    From the well ordering property of natural numbers, we know that for each k there is a unique integer n such that $k!\le n \le (k+1)!$\\
+    Using the division algorithm, we can divide $n$ by $k!$ to get $n=c_kk! + r_k$, where $0\le c_k<k$ and $0\le r_k <k!$\\
+    By continuing to apply the division algorithm to the remainder $r_m$ where $m\le k$, and because we know through the well ordering principle of natural numbers that this process can only occur for at most $k$ repetitions (it continues until a remainder is 0), we can observe the following results:
+    \begin{align*}
+        r_k &= (k-1)!c_{k-1}+r_{k-1}\\
+        r_{k-1}&=(k-2)!c_{k-2}+r_{k-2}\\
+        &...\\
+        r_{2}&=(1)!c_1\\
+    \end{align*}
+    In all of the above statements, for all n, $0\le a_n\le n$ and $0 \le r_n \le n!$\\
+    Through back substitution, we get that $n=c_kk!+c_{k-1}(k-1)!+...+c_1(1!)$, where (in the case that a remainder of 0 was reached before $c_1$ was reached at $c_n$, $c_i$, $1\le i <n$ is equal to 0). This can be rewritten as $n=c_11!+c_22!+...+c_kk!$, where $0\le c_k \le k$ and $c_k\ne 0$ for all k, thus proving that $n=\sum_{i=1}^k c_i i!$
+\end{enumerate}
+\end{solution}
+
+%%Problem 2
+\begin{problem}\text{ \\}
+\begin{enumerate}[label = \alph*)]
+    \item Prove that $f_1 - f_2 + f_3 + ... + (-1)^n f_(n+1) = (-1)^n f_n +1$ for all $n\ge 1$
+    
+    \item Prove that $f_1f_2 + f_2f_3 + f_3f_4 + ... + f_{2n-1}f_{2n} = f_{2n}^2$ for all $n\ge 1$
+\end{enumerate}
+\end{problem}
+
+\begin{solution}\text{ \\}
+\begin{enumerate}[label = \alph*)]
+    \item
+    \textbf{Proof by Induction}\\
+    \textbf{Base Case n=1}
+    \begin{align*}
+        f_1-f_2&=(-1)^1f_1+1\\
+        1-1&=(-1)(1)+1\\
+        0&=-1+1\\
+        0&=0
+    \end{align*}
+    \textbf{Induction Step}\\
+    Assume that $f_1 - f_2 + f_3 + ... + (-1)^n f_(n+1) = (-1)^n f_n +1$. \\
+    \begin{align*}
+        f_1-f_2+f_3+...+(-1)^nf_{n+1}+(-1)^{n+1}f_{n+2}&=(-1)^{n+1}f_{n+1}+1\\
+        (-1)^nf_n+1+(-1)^{n+1}f_{n+2}&=(-1)^{n+1}f_{n+1}+1\\
+        (-1)^nf_n+(-1)^{n+1}f_{n+2}&=(-1)^{n+1}f_{n+1}\\
+        f_n+(-1)f_{n+2}&=(-1)f_{n+1}\\
+        f_n+f_{n+1}7=f_{n+2}\\
+        f_{n+2}&=f_{n+2}
+    \end{align*}
+    As both the base case and induction step are shown above as true, we know that this statement holds true for all $n\ge 1$.
+    
+    \item 
+    \textbf{Proof by Induction}\\
+    \textbf{Base Case n=1}
+    \begin{align*}
+        f_1f_2&=f_2^2\\
+        (1)(1)&=(1)^2\\
+        1&=1
+    \end{align*}
+    \textbf{Induction Step}\\
+    Assume that $f_1f_2 + f_2f_3 + f_3f_4 + ... + f_{2n-1}f_{2n} = f_{2n}^2$.
+    \begin{align*}
+        f_1f_2+f_2f_3+...+f_{2n-1}f_{2n}+f_{2n}f_{2n+1}+f_{2n+1}f_{2n+2}&=f_{2n}^2+f_{2n}f_{2n+1}+f_{2n+1}f_{2n+2}\\
+        &=f_{2n}(f_{2n}+f_{2n+1})+f_{2n+1}f_{2n+2}\\
+        &=f_{2n}f_{2n+2}+f_{2n+1}f_{2n+2}\\
+        &=(f_{2n}+f_{2n+1})f_{2n+2}\\
+        &=f_{2n+2}^2
+    \end{align*}
+    As both the base case and induction step are shown above, we know that this statement holds true for all $n\ge 1$
+\end{enumerate}
+\end{solution}
+
+%%Problem 3
+\begin{problem}\textbf{Recurrence relations.}\\
+You've won a contest! You're going to win money! Your prize is determined as follows. You are given \$ 40, then asked to sit in a chair. At each minute mark of you being in the chair, your winnings are re-calculated as being 150\% of the amount you held during the previous minute but deducted from that is 25\% off the amount you held the minute before that (note that you held \$0 before the contest started). Whoever is holding the contest is no fofol; it's not hard to see that there needs to be some cost to you sitting in the chair, or they'll go bankrupt! So, at each minute mark, you're going to lose \$6 for every minute you've been in the chair (after the first minute you'll lose \$ 6, after the second minute you'll lose another \$ 12, after the third minute you'll lose another \$ 18, and so on). You can leave the chair any time you want, collect your winnings, and walk away.
+\begin{enumerate}[label = \alph*)]
+    \item Write a new recurrence relation that expresses the amount of money you win if you leave the chair after the $m^{th}$ minute (but before minute $m+1$).
+    
+    \item Solve this recurrence relation to find an explicit function of $m$ for your winnings after $m$ minutes.
+    
+    \item How long should you stay in the chair to maximize your winnings? If you make any claims about the behaviour of the function after a given point, make sure you justify your answer (this can be done using basic calculus or by other means).
+\end{enumerate}
+\end{problem}
+
+\begin{solution}\text{ \\}
+\begin{enumerate}[label = \alph*)]
+    \item 
+    Note that at a(-1) (before you sit in the chair, prior to minute 0), you have \$0. As soon as you sit in the chair (minute 0) you have \$40. Thus, $a_0=40$, $a_{-1}=0$.\\
+    At each minute, you gain 1.5x the amount held in the previous minute (minute $m-1$) $\implies 1.5a_{m-1}$.\\
+    At each minute, you lose .25x the amount held two minutes ago (minute $m-2$) $\implies -.25a_{m-2}$.\\
+    At each minute, you also lose 6 dollars for every minute you have been in the chair (minute $m$) $\implies -6m$.\\
+    By combining the above conclusions, the recurrence relation can be written as $a_m = 1.5a_{n-1}-.25a_{n-2}-6n$ for all $n\ge 1$.
+    
+    \item
+    Let $m=n$. To solve this recurrence relation $a_n$, it must be split into $p_n$ and $q_n$.\\
+    \textbf{$p_n$}\\
+    Guess $p_n = an+b$
+    \begin{align*}
+        an+b&=1.5(an-a+b)-.25(an-2a+b)-6n\\
+        0&=\frac{5}{4}an-\frac{1}{2}a+\frac{5}{4}b-6n\\
+        0n+0&=(\frac{5}{4}a-6)n + (\frac{5}{4}b-\frac{1}{2}a)\\
+        \frac{5}{4}a-6&=0 \implies a=\frac{24}{5}\\
+        \frac{5}{4}b-\frac{1}{2}a&=0 \implies b=\frac{24}{5}\\
+        p_n&=\frac{24}{5}n+{24}{5}
+    \end{align*}
+    \textbf{$q_n$}\\
+    Characteristic polynomial: $x^2-1.5x+.25$\\
+    Using the quadratic equation, the roots of the characteristic polynomial are $\frac{3+\sqrt{5}}{4}$ and $\frac{3-\sqrt{5}}{4}$.\\
+    Therefore, $q_n = c_1(\frac{3+\sqrt{5}}{4})^n+c_2(\frac{3-\sqrt{5}}{4})^n$\\
+    \textbf{$a_n$}\\
+    $a_n = p_n + q_n = \frac{24}{5}n+\frac{24}{5}+c_1(\frac{3+\sqrt{5}}{4})^n+c_2(\frac{3-\sqrt{5}}{4})^n$\\
+    When $n=-1$: $0=\frac{4}{3+\sqrt{5}}c_1+\frac{4}{3-\sqrt{5}}c_2$\\
+    When $n=0$: $40=\frac{24}{5}+c_1+c_2$\\
+    When you solve the above system of equations, you find that $c_1=\frac{88(3\sqrt{5}+5)}{25}$ and $c_2=\frac{-88(3\sqrt{5}-5}{25}$\\
+    From this, $a_m = \frac{24}{5}m+\frac{24}{5}+\frac{88(3\sqrt{5}+5)}{25}(\frac{3+\sqrt{5}}{4})^m - \frac{88(3\sqrt{5}-5}{25}(\frac{3-\sqrt{5}}{4})^m$.
+    
+    \item
+    To find the time in the chair for the maximum winnings, take the derivative of the above equation and set it equal to zero (thus finding a relative maximum). \\
+    Following this process, it is best to leave the chair after minute 2 (with total earnings of \$59 at minute 2, and \$57 at minute 3).
+    
+\end{enumerate}
+\end{solution}
+
+\end{document}

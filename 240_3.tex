@@ -1,0 +1,211 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin = .25in}
+\usepackage{amsmath, amsthm, amssymb, enumitem}
+\usepackage{etoolbox}
+\newtheorem{problem}{Problem}
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+
+\title{Math 240 (Discrete Structures 1) Assignment 3}
+\author{Victoria Pittard, ID 260762268}
+\date{\today}
+
+\maketitle
+
+%%Problem 1
+\begin{problem}
+\textbf{Proofs with sets:} Let A, B, C be arbitrary sets. For each of the following statements, either prove it is true (without a Venn diagram) or give a counterexample to show that it is false.
+\begin{enumerate}[label = \alph*)]
+    \item $(A \setminus B)\setminus C = A\setminus (B \cup C)$
+    
+    \item $(A\oplus B = A \oplus C$ and $A \cap B = A \cap C) \implies B \implies C$
+    
+    \item $(A \cup B) \times (C \cup D) = (A \times C) \cup (B \times D)$
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+\begin{enumerate}[label=\alph*)]
+    \item
+    $(A\setminus B) \setminus C$ includes the elements that are in set A, but the elements in B are removed, then those in C are removed. Thus, it contains the elements in A, but neither B nor C.\\
+    $A\setminus (B\cup C)$\\
+    $(B\cup C)$ is the union of sets B and C, including the elements that are in B, C, or their intersection.\\
+    Thus,  $A\setminus (B\cup C)$ includes the elements of A, but the elements in B and/or C are removed. It therefore contains elements in A, but neither B nor C.\\
+    The first specification contains all elements of the second, and the second specification contains all elements of the first, making them equivalent.
+    
+    \item 
+    $A\oplus B$ is equivalent to the union of sets A and B, minus their intersection. Likewise, $A\oplus C$ is equivalent to the union of sets A and C, minus their intersection. \\
+    $A\cap B$ is the intersection of A and B. Likewise, $A\cap C$ is the intersection of A and C. \\
+    If both the B's union with A (without the intersection) and C's union with A (without the intersection) are equal, and B's intersection with A and C's intersection with C are also equal, they share the same elements with A,  and have the same elements that A does not, thus implying that B=C.
+    
+    \item
+       $(A\cup B) \times (C \cup D) \equiv (A \times C) \cup (A \times D) \cup (B \times C) \cup (B \times D)$ (Distributive)\\
+       $(A \times C) \cup (A \times D) \cup (B \times C) \cup (B \times D) \neq (A\times C) \cup (B\times D)$
+       A counterexample to this statement is where A contains 1, 2, 3; B contains 2, 3, 4; C contains 3, 4, 5; D contains 4, 5, 6\\
+       In this case, the left side of the equation works out to be the set of coordinate pairs (x, y) formed when x = {2, 3}, y = {4, 5}, and the right side of the equation works out to be the set of pairs (x1, y1) or (x2, y2) formed when x1 = {1, 2, 3}, y1 = {3, 4, 5}, x2 = {2, 3, 4}, y2 = {4, 5, 6}. It is evident that there is a much wider range of coordinate pairs in the statement on the right than in the statement on the left for this example, thus disproving the assumption they are equal with a counterexample.
+\end{enumerate}
+
+%Problem 2
+\begin{problem}
+\textbf{Relations:}
+\begin{enumerate}[label = \alph*)]
+    \item Determine whether or not each relation is reflexive, symmetric, antisymmetric, and/or transitive. For each property, if the relation has that property, prove it. If it doesn't have that property, give a counterexample. State if the relation is a total order, partial order but not a total order, or neither; justify your answer.
+    \begin{enumerate}
+        \item $\mathcal{R} = \{(X,Y) \in (\mathcal{P}(A))^2 | X \cap Y \neq \emptyset \}$ where A is some arbitrary set
+        
+        \item $\mathcal{R} = \{(a,b) \in \mathbb{N}^2 | a divides b\}$ (a divides b means that there is some integer k such that b = ka)
+    \end{enumerate}
+    
+    \item For $a,b \in \mathbb{R} \setminus {0}$, define a~b iff $a\setminus b \in \mathbb{Q}$. Prove that ~ defines an equivalence relation on $\mathbb{R}\setminus{0}$. Show that $[(9-\sqrt{5})/(1-\sqrt{5}]$ = $[2/(3-6\sqrt{5}]$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+
+\begin{enumerate}[label = \alph*)]
+    \item
+    \begin{enumerate}
+        \item 
+        $\mathcal{R} = \{(X, Y) \in \mathcal{P}(A)^2 | X \cap Y \neq \emptyset\}$\\
+        \underline{Reflexive}: yes\\
+            $\forall X \in \mathcal{P}(A)^2, X \cap X = X$     (Idempotent)\\
+            $\therefore X \cap X \neq \emptyset$ \\
+            $\therefore (X,X) \in \mathcal{R}$\\
+        \underline{Symmetric}: yes\\
+            $(X, Y) \in \mathcal{P}(A)^2 \implies X\cap Y \neq \emptyset$\\
+            $X\cap Y = Y\cap X$ (Commutative)\\
+            $\therefore Y\cap X \neq \emptyset$\\
+            $\therefore Y\cap X \in \mathcal{R}$\\
+        \underline{Transitive}: no\\
+            $(X,Y)\in \mathcal{P}(A)^2 \implies X\cap Y \neq \emptyset$\\
+            $(Y,Z)\in \mathcal{P}(A)^2 \implies Y\cap Z \neq \emptyset$\\
+            \textit{Counterexample:}\\
+                Let $X=\{1, 2\}, Y = \{2, 3\}, Z = \{3, 4\}$\\
+                $X\cap Y = \{2\} \neq \emptyset, Y\cap Z = \{3\} \neq \emptyset$\\
+                $X\cap Z = \emptyset$, as there is no overlap between {1, 2} and {3, 4}.
+        \underline{Antisymmetric}: no\\
+            $(X,Y)\in \mathcal{P}(A)^2 \implies X\cap Y \neq \emptyset$\\
+            $(Y,X) \in \mathcal{P}(A)^2 \implies Y\cap X\neq 
+            \emptyset$\\
+            \textit{Counterexample:}\\
+                Let $X = \{1, 2\}, Y = \{2, 3\}$\\
+                $X\nsubseteq Y, Y \nsubseteq X$\\
+                $\therefore X\neq Y$\\
+        \underline{Conclusion:} As shown above, the relation is reflexive and symmetric. As it is neither transitive nor antisymmetric, it cannot be a partial or total order relation.
+        
+        \item
+        $\mathcal{R} = \{(a, b) \in \mathbb{N}^2 | a divides b$ such that b = ka\\
+        \underline{Reflexive}: yes\\
+            $\forall x \in \mathbb{N}, x = kx$ whenever $k=1$\\
+            $1\in \mathbb{Z}$\\
+            $\therefore a divides a$\\
+            $\therefore a \in \mathcal{R}$\\
+        \underline{Symmetric}: no\\
+            $(x, y) \in \mathbb{N}^2 \implies x divides y \implies y=kx$\\
+            Thus, $\frac{1}{k}y = x$\\
+            $\therefore,$ y divides x, making (y,x) part of the relation, if and only if $\frac{1}{k}\in \mathbb{Z}$\\
+            \textit{Counterexample:}\\
+            $k=2 \implies y = 2x \implies x = \frac{1}{2}y$\\
+            $\frac{1}{2}\notin \mathbb{Z} \therefore (y,x) \notin \mathbb{N}^2$\\
+        \underline{Transitive}: yes\\
+        $(x, y) \in \mathbb{N}^2 \implies y = kx$\\
+        $(y,z) \in \mathbb{N}^2 \implies z=ly$\\
+        Where both k and m are integers.\\
+        From this, it can be concluded that $\frac{z, l} = y$\\ $\frac{z}{l}=kx$\\
+        $z=(kl)x$
+        As the product of two integers (k and l) is also an integer, $z=mx$ where m is the integer product of k and l.\\
+        This implies that x divides z, and $(x, z) \in \mathbb{N}^2$\\
+        \underline{Antisymmetric}: yes\\
+        $(x, y) \in \mathbb{N}^2 \implies y = kx$\\
+        $(y,x) \in \mathbb{N}^2 \implies x=my$\\
+        Where both k and m are integers.\\
+        From this, it can be concluded that $\frac{x}{l}=y \implies x=(kl)x$\\
+        This is only true when $kl=1, \implies x = 1x \implies x=x$\\
+        This means that $x=y$ or else $k, l \neq 1$ or $k, l \notin \mathbb{Z}$\\
+        \underline{Totality}: no\\
+        $\forall a, b \in \mathbb{N}^2$ either (a, b) or (b,a) is true.\\
+        \textit{Counterexample:}\\
+        Let $a=2, b=3$\\
+        $3=2k \implies k=\frac{3}{2} \notin \mathbb{Z}$\\
+        $2=3k \implies k=\frac{2}{3} \notin \mathbb{Z}$\\
+        \underline{Conclusion:}\\
+        As shown above, the relation is reflexive, transitive, and antisymmetric, making it a partial order relation. Totality is not satisfied, and it is not a total order relation. It is not symmetric.
+    \end{enumerate}
+    
+    \item $\mathcal{R} = \{a, b \in \mathbb{R}\setminus \emptyset | \frac{a}{b} \in \mathbb{Q} \implies a \sim b\}$\\
+    \underline{Reflexive:} yes\\
+    $\forall a \in \mathbb{R}\setminus \emptyset, \frac{a}{a} = 1\in \mathbb{Q}$\\
+    $\therefore a, a \in \mathcal{R}$\\
+    \underline{Symmetric:} yes\\
+    $a, b \in \mathbb{R}\setminus \emptyset \implies \frac{a}{b} \in \mathbb{Q}$\\
+    $\implies a = kb, where k\in \mathbb{Z}$ by the Euclidean Algorithm.\\
+    As k is an integer, $\frac{1}{k} \in \mathbb{Q}$\\
+    $\therefore \frac{1}{k} = m, ma = b \implies \frac{b}{a} \in \mathbb{Q}$\\
+    $\therefore b, a \in \mathcal{R}$\\
+    \underline{Transitive:} yes\\
+    $a, b \in \mathbb{R} \setminus \emptyset \implies a=kb, k\in \mathbb{Q}$\\
+    $b, c \in \mathbb{R} \setminus \emptyset \implies b=mc, m\in \mathbb{Q}$\\
+    $a=(km)c$\\
+    As m and k are both integers, their product (km) is also an integer).\\
+    $\therefore b, c \in \mathcal{R}$\\
+    \underline{Conclusion:} As shown above, the relation, is reflexive, symmetric, and transitive, $\sim$ represents an equivalence relation.
+    \\
+    \underline{Equivalence Classes}\\
+    $let \frac{9 - \sqrt{5}}{1-\sqrt{5}} = a, \frac{2}{3-6\sqrt{5}} = x$\\
+    (left to right)\\
+    Suppose [x] = [a]\\
+    Since $x\in [X]$ (Reflexive) $\implies x\in[A]$\\
+    $\implies x\sim a$\\
+    (right to left)\\
+    Suppose $x\sim a$. We will show $[x]\subseteq [a] (a)$ and $[a]\subseteq [x] (b)$\\
+    (a) Let $y\subseteq [x] \implies y\sim x$\\
+    $y\sim x, x\sim a \implies y \sim a$ (transitivity)\\
+    $y\sim a\implies y \in [a] \implies [x] \subseteq [a]$\\
+    (b) Let $z\in [a] \implies z \sim a$\\
+    (since $x\sim a$) $z\sim x \implies z \in [x]$\\
+    $\\implies [a] \subseteq [x]$\\
+    Together, these statements prove it from right to left, as (a) and (b) imply that [a] = [x]
+\end{enumerate}
+
+%Problem 3
+\begin{problem}
+\textbf{Proof techniques:} Prove the following statements using the method of your choice (direct proof, proof of the contrapositive, proof by contradiction).
+\begin{enumerate}[label = \alph*)]
+    \item Let $a,b\in \mathbb{R}$. If $a \in \mathbb{Q}$ and $b\notin \mathbb{Q}$, then $a +- b \notin \mathbb{Q}$
+    
+    \item If the average of 4 distinct integers is 10, then at least one of the integers is greater than 11.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+
+\begin{enumerate}[label = \alph*)]
+    \item 
+    $a, b, c, d \in \mathbb{Z}$; $a\neq b\neq c\neq d$\\
+    $\frac{a+b+c+d}{4} = 10 \implies a+b+c+d = 40$\\
+    To the contrary, assume that a,b,c,d are all less than or equal too 11. Thus, each can be represented as (11-xi), where i ranges from 1-4 and all values of integers xi are greater than or equal to zero.\\
+    $11-x1+11-x2+11-x3+11-x4=40$\\
+    $44-(x1+x2+x3+x4) = 40$\\
+    For the above to be true, either at least one x is less than zero, or there are repeated values of x, thus contradicting the idea that a,b,c,d are unique integers.\\
+    As further evidence, the smallest sum of unique values of the x's is $0+1+2+3 = 6$, and 6 is greater than 4\\
+    Proof by contradiction.
+    
+    \item 
+    \underline{Addition}\\
+    Assume $x\notin \mathbb{Q}$ and $x + \frac{a}{b} = \frac {c}{d}$, where $a,b,c,d \in \mathbb{Z}$ (or: $\frac{a}{b}), \frac{c}{d} \in \mathbb{Q}$, and $b,d\neq 0$\\
+    $x + \frac{a}{b} = \frac {c}{d}\implies x= \frac{c}{d} - \frac{a}{b}\implies x=\frac{cb-ad}{bd}$\\
+    Integers are closed under multiplication and subtraction, thus x is an integer (CONTRADICTION).\\
+    \underline{Subtraction}\\
+    Assume $x\notin \mathbb{Q}$ and $x - \frac{a}{b} = \frac {c}{d}$, where $a,b,c,d \in \mathbb{Z}$ (or: $\frac{a}{b}), \frac{c}{d} \in \mathbb{Q}$, and $b,d\neq 0$\\
+    $x-\frac{a}{b} = \frac{c}{d} \implies x= \frac{c}{d} + \frac{a}{b} \implies x=\frac{bc+ad}{bd}$\\
+    Integers are closed under multiplication and addition, thus x is an integer (CONTRADICTION).
+\end{enumerate}
+
+\end{document}
